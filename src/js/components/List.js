@@ -10,7 +10,9 @@ const ConnectedList = ({ articles }) => ( //A stateless JSX element
   <ul className="list-group list-group-flush">
     {articles.map(el => ( //Note that articles, the parameter, is read from props
       <li className="list-group-item" key={el.id}>
-        {el.title}
+        {el.title}:&emsp;
+        {el.description}&emsp;
+        ({el.progress})
       </li>
     ))}
   </ul>

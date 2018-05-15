@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import uuidv1 from "uuid";
 import { addArticle } from "../actions/index";
+import { PROGRESS_NOT_STARTED } from "../constants/constants.js";
 
 const mapDispatchToProps = dispatch => { //Redux dispatch actions mapped to React props. 
     //The React component can dispatch actions fired in Redux
@@ -16,7 +17,9 @@ class ConnectedForm extends Component { //A regular React.js component class, wi
     super();
 
     this.state = {
-      title: ""
+      title: "",
+      description: "",
+      progress: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -29,14 +32,14 @@ class ConnectedForm extends Component { //A regular React.js component class, wi
 
   handleSubmit(event) {
     event.preventDefault();
-    const { title } = this.state;
+    const { title, description } = this.state;
     const id = uuidv1();
-    this.props.addArticle({ title, id }); //Because of mapDispatchToProps, we can reference this function call
-    this.setState({ title: "" });
+    this.props.addArticle({ title, description, id }); //Because of mapDispatchToProps, we can reference this function call
+    this.setState({ title: "", description: "" });
   }
 
   render() {
-    const { title } = this.state;
+    const { title, description } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -46,6 +49,15 @@ class ConnectedForm extends Component { //A regular React.js component class, wi
             className="form-control"
             id="title"
             value={title}
+            onChange={this.handleChange}
+          />
+          
+          <label htmlFor="description">Description</label>
+          <input
+            type="text"
+            className="form-control"
+            id="description"
+            value={description}
             onChange={this.handleChange}
           />
         </div>
