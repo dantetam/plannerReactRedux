@@ -18,8 +18,7 @@ class ConnectedForm extends Component { //A regular React.js component class, wi
 
     this.state = {
       title: "",
-      description: "",
-      progress: ""
+      description: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -33,8 +32,9 @@ class ConnectedForm extends Component { //A regular React.js component class, wi
   handleSubmit(event) {
     event.preventDefault();
     const { title, description } = this.state;
+    const progress = PROGRESS_NOT_STARTED;
     const id = uuidv1();
-    this.props.addArticle({ title, description, id }); //Because of mapDispatchToProps, we can reference this function call
+    this.props.addArticle({ title, description, progress, id }); //Because of mapDispatchToProps, we can reference this function call
     this.setState({ title: "", description: "" });
   }
 

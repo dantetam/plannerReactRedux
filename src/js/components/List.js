@@ -1,24 +1,54 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { changeProgressArticle } from "../actions/index";
+import { PROGRESS_NOT_STARTED } from "../constants/constants.js";
 
 const mapStateToProps = state => { //Map a Redux state into a regular React props object
   return { articles: state.articles };
 };
 
-const ConnectedList = ({ articles }) => ( //A stateless JSX element
-  <ul className="list-group list-group-flush">
-    {articles.map(el => ( //Note that articles, the parameter, is read from props
-      <li className="list-group-item" key={el.id}>
-        {el.title}:&emsp;
-        {el.description}&emsp;
-        ({el.progress})
-      </li>
-    ))}
-  </ul>
-);
+const mapDispatchToProps = dispatch => { //Redux dispatch actions mapped to React props. 
+    //The React component can dispatch actions fired in Redux
+  return {
+    toggleProgress: article => dispatch(changeProgressArticle(article))
+  };
+};
 
-const List = connect(mapStateToProps)(ConnectedList); //Note: the actual DOM element is the result of this connect
+class ConnectedList extends Component {
+    constructor() {
+      super();
+      this.state = {};
+      this.handleToggleProgress = this.handleToggleProgress.bind(this);
+    }
+    
+    handleToggleProgress(event) {
+        event.preventDefault();
+        let title = event.target.getAttribute('data-title');
+        let description = event.target.getAttribute('data-description');
+        this.props.toggleProgress({ title, description }); //Because of mapDispatchToProps, we can reference this function call
+    }
+
+    render() {
+        let self = this;
+        return (
+            <ul className="list-group list-group-flush">
+              {this.props.articles.map(el => ( //Note that articles, the parameter, is read from props
+                <li className="list-group-item" key={el.id}>
+                  {el.title}:&emsp;
+                  {el.description}&emsp;
+                  ({el.progress})&emsp;
+                  <button data-title={el.title} data-description={el.description} onClick={function(event) {
+                      self.handleToggleProgress(event);        
+                  }}>{el.progress === PROGRESS_NOT_STARTED ? "X" : "V"}</button>
+                </li>
+              ))}
+            </ul>
+        );
+    }
+}
+
+const List = connect(mapStateToProps, mapDispatchToProps)(ConnectedList); //Note: the actual DOM element is the result of this connect
 
 ConnectedList.propTypes = { //JSX validation
   articles: PropTypes.array.isRequired

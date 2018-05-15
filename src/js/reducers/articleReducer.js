@@ -22,6 +22,8 @@ const articleReducer = (state = [], action) => {
     case ADD_ARTICLE:
       return [...state, action.payload];
     case TOGGLE_PROGRESS:
+     console.log(state);
+     console.log(action.payload)
       let clonedState = [...state];
       for (var i = 0; i < clonedState.length; i++) {
           if (clonedState[i].title === action.payload.title) {
