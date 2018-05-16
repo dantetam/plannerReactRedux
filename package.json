@@ -9,14 +9,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/valentinogagliardi/minimal-react-webpack.git"
+    "url": "git+https://github.com/dantetam/plannerReactRedux.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/valentinogagliardi/minimal-react-webpack/issues"
-  },
   "homepage": "https://github.com/valentinogagliardi/minimal-react-webpack#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -32,8 +29,11 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "uuid": "^3.1.0",
-    "webpack": "^4.1.1",
+    "webpack": "^4.8.3",
     "webpack-cli": "^2.0.11",
     "webpack-dev-server": "^3.1.1"
+  },
+  "dependencies": {
+    "react-router-dom": "^4.2.2"
   }
 }
