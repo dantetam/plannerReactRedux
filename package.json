@@ -14,7 +14,7 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "homepage": "https://github.com/valentinogagliardi/minimal-react-webpack#readme",
+  "homepage": "",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",

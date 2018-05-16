@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom'
 import PropTypes from "prop-types";
 import { changeProgressArticle } from "../actions/index";
 import { PROGRESS_NOT_STARTED } from "../constants/constants.js";
@@ -48,7 +49,7 @@ class ConnectedList extends Component {
     }
 }
 
-const List = connect(mapStateToProps, mapDispatchToProps)(ConnectedList); //Note: the actual DOM element is the result of this connect
+const List = withRouter(connect(mapStateToProps, mapDispatchToProps)(ConnectedList)); //Note: the actual DOM element is the result of this connect
 
 ConnectedList.propTypes = { //JSX validation
   articles: PropTypes.array.isRequired

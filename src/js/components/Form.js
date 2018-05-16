@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom'
 import PropTypes from "prop-types";
 import uuidv1 from "uuid";
 import { addArticle } from "../actions/index";
@@ -69,7 +70,7 @@ class ConnectedForm extends Component { //A regular React.js component class, wi
   }
 }
 
-const Form = connect(null, mapDispatchToProps)(ConnectedForm);
+const Form = withRouter(connect(null, mapDispatchToProps)(ConnectedForm));
 
 ConnectedForm.propTypes = {
   addArticle: PropTypes.func.isRequired
