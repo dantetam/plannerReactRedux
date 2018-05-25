@@ -36,12 +36,14 @@ class ConnectedList extends Component {
             <ul className="list-group list-group-flush">
               {this.props.articles.map(el => ( //Note that articles, the parameter, is read from props
                 <li className="list-group-item" key={el.id}>
-                  {el.title}:&emsp;
-                  {el.description}&emsp;
-                  ({el.progress})&emsp;
-                  <button data-title={el.title} data-description={el.description} onClick={function(event) {
-                      self.handleToggleProgress(event);        
-                  }}>{el.progress === PROGRESS_NOT_STARTED ? "X" : "V"}</button>
+                    <button data-title={el.title} data-description={el.description} onClick={function(event) {
+                        self.handleToggleProgress(event);        
+                    }}>
+                      {el.progress === PROGRESS_NOT_STARTED ? "X" : "V"}
+                    </button>&emsp;
+                    {el.title}:&emsp;
+                    {el.description}&emsp;
+                    ({el.progress})&emsp;
                 </li>
               ))}
             </ul>
