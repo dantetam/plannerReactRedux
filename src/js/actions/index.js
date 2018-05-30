@@ -7,3 +7,8 @@ export const changeProgressArticle = article => ({
   type: "TOGGLE_PROGRESS",
   payload: article
 });
+
+export const randomizeArticles = () => ({
+  type: "RANDOMIZE_ARTICLES",
+  payload: null
+});

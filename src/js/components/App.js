@@ -2,7 +2,7 @@ import React from "react";
 import List from "./List";
 import Form from "./Form";
 import Calendar from "./Calendar";
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 //A regular JSX element but with combined Redux/React components
 

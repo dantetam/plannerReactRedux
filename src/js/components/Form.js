@@ -3,13 +3,14 @@ import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom'
 import PropTypes from "prop-types";
 import uuidv1 from "uuid";
-import { addArticle } from "../actions/index";
+import { addArticle, randomizeArticles } from "../actions/index";
 import { PROGRESS_NOT_STARTED } from "../constants/constants.js";
 
 const mapDispatchToProps = dispatch => { //Redux dispatch actions mapped to React props. 
     //The React component can dispatch actions fired in Redux
   return {
-    addArticle: article => dispatch(addArticle(article))
+    addArticle: article => dispatch(addArticle(article)),
+    randomizeArticles: () => dispatch(randomizeArticles())
   };
 };
 
@@ -24,6 +25,7 @@ class ConnectedForm extends Component { //A regular React.js component class, wi
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRandomize = this.handleRandomize.bind(this);
   }
 
   handleChange(event) {
@@ -37,6 +39,13 @@ class ConnectedForm extends Component { //A regular React.js component class, wi
     const id = uuidv1();
     this.props.addArticle({ title, description, progress, id }); //Because of mapDispatchToProps, we can reference this function call
     this.setState({ title: "", description: "" });
+  }
+  
+  handleRandomize(event) {
+      const self = this;
+      setTimeout(function() {
+          self.props.randomizeArticles();
+      }, 500);
   }
 
   render() {
@@ -64,6 +73,9 @@ class ConnectedForm extends Component { //A regular React.js component class, wi
         </div>
         <button type="submit" className="btn btn-success btn-lg">
           SAVE
+        </button>
+        <button type="button" className="btn btn-success btn-lg" onClick={this.handleRandomize}>
+          RANDOMIZE STORE ORDER
         </button>
       </form>
     );

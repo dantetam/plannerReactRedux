@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import PropTypes from "prop-types";
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const mapStateToProps = state => { //Map a Redux state into a regular React props object
     return {};
@@ -32,13 +33,21 @@ class Calendar extends Component {
 
     render() {
         let self = this;
+        
+          const { match } = this.props // coming from React Router.
+
         return (
             <div className="calendar">
+                <h2>{match.url}</h2>
+                
+                <Link to="/calendar/apr2018">Prev month</Link>
+                <Link to="/calendar/may2018">This month</Link>
+                <Link to="/calendar/jun2018">Next month</Link>
+                    
                 <div className="month"> 
                   <ul>
                     <li className="prev">&#10094;</li>
                     <li className="next">&#10095;</li>
-                    <li>May<span>2018</span></li>
                   </ul>
                 </div>
 

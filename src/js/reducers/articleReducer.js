@@ -1,5 +1,5 @@
 import { ADD_ARTICLE } from "../constants/constants.js";
-import { TOGGLE_PROGRESS, 
+import { TOGGLE_PROGRESS, RANDOMIZE_ARTICLES,
     PROGRESS_NOT_STARTED, PROGRESS_ONE_FOURTH, PROGRESS_ONE_HALF, 
     PROGRESS_THREE_FOURTHS, PROGRESS_COMPLETE } from "../constants/constants.js";
     
@@ -22,12 +22,22 @@ const articleReducer = (state = [], action) => {
     case ADD_ARTICLE:
       return [...state, action.payload];
     case TOGGLE_PROGRESS:
-      let clonedState = [...state];
+      var clonedState = [...state];
       for (var i = 0; i < clonedState.length; i++) {
           if (clonedState[i].title === action.payload.title) {
               clonedState[i]["progress"] = cycleProgress(clonedState[i]["progress"]);
               break; 
           }
+      }
+      return clonedState;
+    case RANDOMIZE_ARTICLES:
+      var clonedState = [...state];
+      for (var i = 0; i < state.length * state.length; i++) {
+        let leftIndex = Math.floor(Math.random() * state.length);
+        let rightIndex = Math.floor(Math.random() * state.length);
+        let temp = clonedState[leftIndex];
+        clonedState[leftIndex] = clonedState[rightIndex];
+        clonedState[rightIndex] = temp;
       }
       return clonedState;
     default:
