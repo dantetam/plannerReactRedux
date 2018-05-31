@@ -24,6 +24,7 @@ const App = () => (
           </nav>  
           <div>
             <Route path="/calendar" component={Calendar}/>
+            <Route path="/calendar/jun2018" component={Calendar}/>
           </div>
       </div>
   </div>
