@@ -32,11 +32,18 @@ module.exports = {
   ],
   devServer: {
     proxy: {
-      '/getproxy': {
+      '/proxy': {
         bypass: (req, res) => {
-          res.send("This is a proxy GET request.");
+             if (req.method === 'GET' && req.url.includes("/getproxy")) {
+                 res.send({data: "This is a proxy GET request."});
+             }
+             else if (req.method === 'POST' && req.url.includes("/postproxy")) {
+                 res.send({data: "This is a proxy POST request."});
+             }
         }
-      },
+      }
+      /*
+      ,
       '/postproxy': {
         bypass: (req, res) => {
             if(req.method == 'POST') {
@@ -44,6 +51,7 @@ module.exports = {
             }
         }  
       }
+      */
     }
   }
 };

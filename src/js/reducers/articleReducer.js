@@ -1,5 +1,5 @@
 import { ADD_ARTICLE } from "../constants/constants.js";
-import { TOGGLE_PROGRESS, RANDOMIZE_ARTICLES,
+import { TOGGLE_PROGRESS, RANDOMIZE_ARTICLES, HTTP_REQUEST,
     PROGRESS_NOT_STARTED, PROGRESS_ONE_FOURTH, PROGRESS_ONE_HALF, 
     PROGRESS_THREE_FOURTHS, PROGRESS_COMPLETE } from "../constants/constants.js";
     
@@ -40,6 +40,13 @@ const articleReducer = (state = [], action) => {
         clonedState[rightIndex] = temp;
       }
       return clonedState;
+    case HTTP_REQUEST:
+        console.log("Creating new redux state HTTP_REQUEST");
+        console.log(action);
+        var newString = action.payload && action.payload.data ? action.payload.data : "No action payload received";
+        var clonedState = [...state];
+        clonedState.push({title: "New Post", description: newString, progress: PROGRESS_NOT_STARTED});
+        return clonedState;
     default:
       return state;
   }
